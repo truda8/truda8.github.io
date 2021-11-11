@@ -1,0 +1,194 @@
+/* Here is your custom css styles. */
+
+body{
+    font-family: 'Mulish', -apple-system, 'Noto Serif SC', "PingFang SC", "Microsoft Yahei UI", "Microsoft Yahei", sans-serif;
+}
+
+/* hexo-filter-github-emojis */
+.github-emoji {
+    height: 2em;
+    width: 2em;
+    display: inline-block !important;
+    position: relative;
+    margin: 0 3px !important;
+    padding: 0;
+}
+.github-emoji:hover {
+    animation: emoji-face 5s infinite ease-in-out;
+}
+@keyframes emoji-face {
+    2% {
+        transform: translate(0, 1.5px) rotate(1.5deg);
+    }
+    4% {
+        transform: translate(0, -1.5px) rotate(-0.5deg);
+    }
+    6% {
+        transform: translate(0, 1.5px) rotate(-1.5deg);
+    }
+    8% {
+        transform: translate(0, -1.5px) rotate(-1.5deg);
+    }
+    10% {
+        transform: translate(0, 2.5px) rotate(1.5deg);
+    }
+    12% {
+        transform: translate(0, -0.5px) rotate(1.5deg);
+    }
+    14% {
+        transform: translate(0, -1.5px) rotate(1.5deg);
+    }
+    16% {
+        transform: translate(0, -0.5px) rotate(-1.5deg);
+    }
+    18% {
+        transform: translate(0, 0.5px) rotate(-1.5deg);
+    }
+    20% {
+        transform: translate(0, -1.5px) rotate(2.5deg);
+    }
+    22% {
+        transform: translate(0, 0.5px) rotate(-1.5deg);
+    }
+    24% {
+        transform: translate(0, 1.5px) rotate(1.5deg);
+    }
+    26% {
+        transform: translate(0, 0.5px) rotate(0.5deg);
+    }
+    28% {
+        transform: translate(0, 0.5px) rotate(1.5deg);
+    }
+}
+
+#articleContent p {
+    font-size: 17px;
+}
+
+#articleContent h1 {
+    font-size: 22px;
+    color: #f33535;
+}
+
+#articleContent h2 {
+    font-size: 20px;
+    color: #3ec1d3;
+}
+
+#articleContent h3 {
+    font-size: 18px;
+    color: #8c82fc;
+}
+
+#articleContent h4 {
+    font-size: 16px;
+    color: #ff8364;
+}
+
+#articleContent h5 {
+    font-size: 14px;
+    color: #f25d9c;
+}
+
+#articleContent img {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2),
+        0 5px 10px -15px rgba(0, 0, 0, 0.3);
+}
+
+#articleContent ul li {
+    list-style-image: url(../images/info.png);
+    color: #E4FBFF;
+}
+
+#articleContent ol li {
+    color: #E4FBFF;
+}
+
+li::marker {
+    color: #ff5959;
+    font-weight: bold;
+}
+
+#articleContent ul,
+#articleContent ol {
+    font-size: 17px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+#articleContent p strong {
+    color: #ff9234;
+}
+
+#articleContent p del {
+    color: #ff9d9d;
+}
+
+table tr:nth-child(2n), thead {
+    background-color: rgb(0 0 0 / 20%) !important;
+}
+
+.card .card-title {
+    font-weight: 400 !important;
+}
+
+.block-with-text:after {
+    background: #282c34;
+}
+
+#articleContent {
+    font-size: 16px;
+}
+
+.article-card-content hr {
+    border-top: 1px solid #282c34;
+}
+
+#artDetail .reprint {
+    border-radius: 8px;
+}
+
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background: rgb(0 0 0 / 20%) !important;
+}
+
+.caption {
+    display: none;
+}
+
+#artDetail .post-info {
+    color: #42b983;
+}
+
+#artDetail .post-info .post-date {
+    color: #42b983;
+}
+
+.chip-container .tag-title {
+    color: #2588ff;
+}
+
+#articleContent ul {
+    margin-left: 20px;
+}
+
+.vcontent p {
+    color: #42b983;
+}
+
+#vcomments a {
+    color: #42b983 !important;
+}
+
+.friends-container .tag-title {
+    color: #2588ff !important;
+}
+
+#cd-timeline .card {
+    border-radius: 3px;
+}
+
+.fa-fw {
+    color: #2588ff;
+}
+

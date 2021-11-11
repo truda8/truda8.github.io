@@ -1,0 +1,1438 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="TCP/IP协议详解, Truda,Blog,SEC">
+    <meta name="description" content="Truda Blog">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>TCP/IP协议详解 | Truda Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Truda Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Truda Blog</div>
+        <div class="logo-desc">
+            
+            Truda Blog
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/truda8" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/truda8" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    <meta name="referrer" content="no-referrer" />
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.jpg.cm/2021/07/27/IVQegT.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">TCP/IP协议详解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">网络</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                网络
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-26
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="TCP-IP-协议详解"><a href="#TCP-IP-协议详解" class="headerlink" title="TCP/IP 协议详解"></a>TCP/IP 协议详解</h1><h2 id="一、TCP-端口"><a href="#一、TCP-端口" class="headerlink" title="一、TCP 端口"></a>一、TCP 端口</h2><h3 id="1-端口与进程"><a href="#1-端口与进程" class="headerlink" title="1. 端口与进程"></a>1. 端口与进程</h3><p>TCP 的包是不包含 IP 地址信息的，那是 IP 层上的事，但是有源端口和目的端口。 就是说，端口这一东西，是属于 TCP 知识范畴的。<br>我们知道两个进程，在计算机内部进行通信，可以有管道、内存共享、信号量、消息队列等方法。 而两个进程如果需要进行通讯最基本的一个前提是能够唯一的标识一个进程，在本地进程通讯中我们可以使用<strong>「PID(进程标识符)」</strong> 来唯一标识一个进程。 但 PID 只在本地唯一，如果把两个进程放到了不同的两台计算机，然后他们要通信的话，PID 就不够用了，这样就需要另外一种手段了。<br>解决这个问题的方法就是在运输层使用<strong>「协议端口号 (protocol port number)」</strong>，简称<strong>「端口 (port)」</strong>。 我们知道 IP 层的 ip 地址可以唯一标识主机，而 TCP 层协议和端口号可以唯一标识主机的一个进程，这样我们可以利用：<strong>「ip 地址＋协议＋端口号」</strong>唯一标示网络中的一个进程。 在一些场合，也把这种唯一标识的模式称为<strong>「套接字 (Socket)」</strong>。<br>这就是说，虽然通信的重点是应用进程，但我们只要把要传送的报文交到目的主机的某一个合适的端口，剩下的工作就由 TCP 来完成了。</p>
+<h3 id="2-认识端口"><a href="#2-认识端口" class="headerlink" title="2. 认识端口"></a>2. 认识端口</h3><p>TCP 用一个 16 位端口号来标识一个端口，可允许有 65536 ( 2 的 16 次方) 个不同的端口号，范围在 0 ~ 65535 之间。<br>一些常见的端口号：</p>
+<table>
+<thead>
+<tr>
+<th><strong>应用程序</strong></th>
+<th>FTP</th>
+<th>TELNET</th>
+<th>SMTP</th>
+<th>DNS</th>
+<th>TFTP</th>
+<th>HTTP</th>
+<th>HTTPS</th>
+<th>SNMP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>熟知端口号</strong></td>
+<td>21</td>
+<td>23</td>
+<td>25</td>
+<td>53</td>
+<td>69</td>
+<td>80</td>
+<td>443</td>
+<td>161</td>
+</tr>
+</tbody></table>
+<h2 id="二、TCP-报文结构"><a href="#二、TCP-报文结构" class="headerlink" title="二、TCP 报文结构"></a>二、TCP 报文结构</h2><p>TCP 是面向字节流的，但传送的数据单元却是报文段。<br><strong>什么是报文？</strong> 例如一个 100kb 的 HTML 文档需要传送到另外一台计算机，并不会整个文档直接传送过去，可能会切割成几个部分，比如四个分别为 25kb 的数据段。 而每个数据段再加上一个 TCP 首部，就组成了 TCP 报文。 一共四个 TCP 报文，发送到另外一个端。 另外一端收到数据包，然后再剔除 TCP 首部，组装起来。 等到四个数据包都收到了，就能还原出来一个完整的 HTML 文档了。<br>在 OSI 的七层协议中，第二层（数据链路层）的数据叫「Frame」，第三层（网络层）上的数据叫「Packet」，第四层（传输层）的数据叫「Segment」。<br>TCP 报文 (Segment)，包括首部和数据部分：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/519483/1627301281422-ea93eb5a-5a77-4e83-85ea-ea593d5d680d.png#clientId=u5f8f13c6-200a-4&amp;from=paste&amp;height=131&amp;id=u7ab0f987&amp;margin=%5Bobject%20Object%5D&amp;name=%E5%AE%9E%E8%AE%AD%E4%BA%8C.png&amp;originHeight=96&amp;originWidth=282&amp;originalType=binary%E2%88%B6=1&amp;size=5361&amp;status=done&amp;style=none&amp;taskId=ua474028e-5d52-4567-a718-50ccc5b6f64&amp;width=385" alt="实训二.png"><br>而 TCP 的全部功能都体现在它首部中各字段的作用，只有弄清 TCP 首部各字段的作用才能掌握 TCP 的工作原理。 TCP 报文段首部的前 20 个字节是固定的，后面有 4N 字节是根据需要而增加的。 下图是把 TCP 报文中的首部放大来看。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/519483/1627301461063-ca7ff995-315f-4b67-b301-135da472f17b.png#clientId=u5f8f13c6-200a-4&amp;from=paste&amp;height=440&amp;id=ua56be9a6&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=440&amp;originWidth=720&amp;originalType=binary%E2%88%B6=1&amp;size=29701&amp;status=done&amp;style=none&amp;taskId=ub96d79f1-92cc-4cb7-8fdf-b98509296f1&amp;width=720" alt="image.png"><br>TCP 的首部包括以下内容：</p>
+<ol>
+<li> 源端口 source port</li>
+<li> 目的端口 destination port</li>
+<li> 序号 sequence number</li>
+<li> 确认号 acknowledgment number</li>
+<li> 数据偏移 offset</li>
+<li> 保留 reserved</li>
+<li> 标志位 tcp flags</li>
+<li> 窗口大小 window size</li>
+<li> 检验和 checksum</li>
+<li> 紧急指针 urgent pointer</li>
+<li> 选项 tcp options</li>
+</ol>
+<p>​</p>
+<h3 id="TCP-首部各字段的意义和作用"><a href="#TCP-首部各字段的意义和作用" class="headerlink" title="TCP 首部各字段的意义和作用"></a>TCP 首部各字段的意义和作用</h3><h3 id="01-源端口和目的端口-Port"><a href="#01-源端口和目的端口-Port" class="headerlink" title="01. 源端口和目的端口 Port"></a>01. 源端口和目的端口 Port</h3><p>各占<strong>2</strong>个 字节，共<strong>4</strong>个字节。 用来告知主机该报文段是来自哪里以及传送给哪个应用程序（应用程序绑定了端口）的。 进行 TCP 通讯时，客户端通常使用系统自动选择的临时端口号，而服务器则使用知名服务端口号。</p>
+<h3 id="02-序号-Sequence-Number"><a href="#02-序号-Sequence-Number" class="headerlink" title="02. 序号 Sequence Number"></a>02. 序号 Sequence Number</h3><p>占 <strong>4</strong> 个字节。 TCP 是面向字节流的，在一个 TCP 连接中传输的字节流中的每个字节都按照顺序编号。 例如 100 kb 的 HTML 文档数据，一共 102400 (100 * 1024) 个字节，那么每一个字节就都有了编号，整个文档的编号的范围是 0 ~ 102399。<br>序号字段值指的是<strong>本报文段</strong>所发送的数据的第一个字节的序号。 那么 100 的 HTML 文档分割成四个等分之后， 第一个 TCP 报文段包含的是第一个 25kb 的数据，0 ~ 25599 字节， 该报文的序号的值就是：0 第二个 TCP 报文段包含的是第二个 25kb 的数据，25600 ~ 51199 字节，该报文的序号的值就是：25600 ……<br>根据 8 位 = 1 字节，那么 4 个字节可以表示的数值范围：[0, 2^32]，一共 2^32 (4294967296) 个序号。 序号增加到最大值的时候，下一个序号又回到了 0. 也就是说 TCP 协议可对 4GB 的数据进行编号，在一般情况下可保证当序号重复使用时，旧序号的数据早已经通过网络到达终点或者丢失了。</p>
+<h3 id="03-确认号-Acknowledgemt-Number"><a href="#03-确认号-Acknowledgemt-Number" class="headerlink" title="03. 确认号 Acknowledgemt Number"></a>03. 确认号 Acknowledgemt Number</h3><p>占<strong>4</strong>个字节。 表示<strong>期望收到对方下一个报文段的序号值</strong>。 TCP 的可靠性，是建立在「每一个数据报文都需要确认收到」的基础之上的。 就是说，通讯的任何一方在收到对方的一个报文之后，都要发送一个相对应的「确认报文」，来表达确认收到。<strong>那么，确认报文，就会包含确认号</strong>。 例如，通讯的一方收到了第一个 25kb 的报文，该报文的 序号值=0，那么就需要回复一个<strong>确认报文</strong>，其中的确认号 = 25600.</p>
+<h3 id="04-数据偏移-Offset"><a href="#04-数据偏移-Offset" class="headerlink" title="04. 数据偏移 Offset"></a>04. 数据偏移 Offset</h3><p>占<strong>0.5</strong>个字节 (4 位)。 这个字段实际上是指出了<strong>TCP 报文段的首部长度</strong>，它指出了 TCP 报文段的数据起始处 距离 TCP 报文的起始处 有多远。（注意 数据起始处 和 报文起始处 的意思）<br>一个数据偏移量 = 4 byte，由于 4 位二进制数能表示的最大十进制数字是 15，因此数据偏移的最大值是 60 byte，这也侧面限制了 TCP 首部的最大长度。</p>
+<h3 id="05-保留-Reserved"><a href="#05-保留-Reserved" class="headerlink" title="05. 保留 Reserved"></a>05. 保留 Reserved</h3><p>占 <strong>0.75</strong> 个字节 (6 位)。 保留为今后使用，但目前应置为 0。</p>
+<h3 id="06-标志位-TCP-Flags"><a href="#06-标志位-TCP-Flags" class="headerlink" title="06. 标志位 TCP Flags"></a>06. 标志位 TCP Flags</h3><p>标志位，一共有 6 个，分别占 1 位，共 6 位 。 每一位的值只有 0 和 1，分别表达不同意思。<br><strong>紧急 URG (Urgent)</strong><br>当 <code>URG = 1</code> 的时候，表示紧急指针（Urgent Pointer）有效。 它告诉系统此报文段中有紧急数据，应尽快传送，而不要按原来的排队顺序来传送。 URG 要与首部中的 紧急指针 字段配合使用。<br><strong>确认 ACK (Acknowlegemt)</strong><br>当 <code>ACK = 1</code> 的时候，确认号（Acknowledgemt Number）有效。 一般称携带 ACK 标志的 TCP 报文段为「确认报文段」。 TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 设置为 1。<br><strong>推送 PSH (Push)</strong><br>当 <code>PSH = 1</code> 的时候，表示该报文段高优先级，接收方 TCP 应该尽快推送给接收应用程序，而不用等到整个 TCP 缓存都填满了后再交付。<br><strong>复位 RST (Reset)</strong><br>当 <code>RST = 1</code> 的时候，表示 TCP 连接中出现严重错误，需要释放并重新建立连接。 一般称携带 RST 标志的 TCP 报文段为「复位报文段」。<br><strong>同步 SYN (SYNchronization)</strong><br>当 <code>SYN = 1</code> 的时候，表明这是一个请求连接报文段。 一般称携带 SYN 标志的 TCP 报文段为「同步报文段」。 在 TCP 三次握手中的第一个报文就是同步报文段，在连接建立时用来同步序号。 对方若同意建立连接，则应在响应的报文段中使 SYN = 1 和 ACK = 1。<br><strong>终止 FIN (Finis)</strong><br>当 <code>FIN = 1</code> 时，表示此报文段的发送方的数据已经发送完毕，并要求释放 TCP 连接。 一般称携带 FIN 的报文段为「结束报文段」。 在 TCP 四次挥手释放连接的时候，就会用到该标志。</p>
+<h3 id="07-窗口大小-Window-Size"><a href="#07-窗口大小-Window-Size" class="headerlink" title="07. 窗口大小 Window Size"></a>07. 窗口大小 Window Size</h3><p>占 <strong>2</strong> 字节。 该字段明确指出了现在允许对方发送的数据量，它告诉对方本端的 TCP 接收缓冲区还能容纳多少字节的数据，这样对方就可以控制发送数据的速度。 窗口大小的值是指，从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量。 例如，假如确认号是 701 ，窗口字段是 1000。这就表明，从 701 号算起，发送此报文段的一方还有接收 1000 （字节序号是 701 ~ 1700） 个字节的数据的接收缓存空间。</p>
+<h3 id="08-校验和-TCP-Checksum"><a href="#08-校验和-TCP-Checksum" class="headerlink" title="08. 校验和 TCP Checksum"></a>08. 校验和 TCP Checksum</h3><p>占 <strong>2</strong> 个字节。 由发送端填充，接收端对 TCP 报文段执行 CRC 算法，以检验 TCP 报文段在传输过程中是否损坏，如果损坏这丢弃。 检验范围包括首部和数据两部分，这也是 TCP 可靠传输的一个重要保障。</p>
+<h3 id="09-紧急指针-Urgent-Pointer"><a href="#09-紧急指针-Urgent-Pointer" class="headerlink" title="09. 紧急指针 Urgent Pointer"></a>09. 紧急指针 Urgent Pointer</h3><p>占 <strong>2</strong>个字节。 仅在 URG = 1 时才有意义，它指出本报文段中的紧急数据的字节数。 当 URG = 1 时，发送方 TCP 就把紧急数据插入到本报文段数据的<strong>最前面</strong>，而在紧急数据后面的数据仍是普通数据。 因此，紧急指针指出了紧急数据的末尾在报文段中的位置。</p>
+<h2 id="三、TCP-连接的建立和释放"><a href="#三、TCP-连接的建立和释放" class="headerlink" title="三、TCP 连接的建立和释放"></a>三、TCP 连接的建立和释放</h2><h3 id="1-TCP-的连接"><a href="#1-TCP-的连接" class="headerlink" title="1. TCP 的连接"></a>1. TCP 的连接</h3><p>TCP 的整个交流过程可以总结为：先建立连接，然后传输数据，最后释放连接。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/519483/1627302229893-fd99ba2f-f93d-46b7-b9ae-b645e528f0ca.png#clientId=u30d4f1b7-5f72-4&amp;from=paste&amp;height=96&amp;id=u9589c535&amp;margin=%5Bobject%20Object%5D&amp;name=%E5%AE%9E%E8%AE%AD%E4%BA%8C%20%281%29.png&amp;originHeight=96&amp;originWidth=576&amp;originalType=binary%E2%88%B6=1&amp;size=10436&amp;status=done&amp;style=none&amp;taskId=ue1fb9282-8a11-4b8b-8243-b1efd24bba0&amp;width=576" alt="实训二 (1).png"><br>详细过程：<br><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/519483/1627388467966-e492a08d-ffa5-4f11-931e-88d36b5ec382.jpeg#clientId=u23b20a01-81ed-4&amp;from=drop&amp;id=u93ac234d&amp;margin=%5Bobject%20Object%5D&amp;name=image.jpeg&amp;originHeight=910&amp;originWidth=680&amp;originalType=binary%E2%88%B6=1&amp;size=66393&amp;status=done&amp;style=none&amp;taskId=u494b5401-9eb8-4b76-bafd-3977ea7e390" alt="image.jpeg"></p>
+<h3 id="2、三次握手，建立连接"><a href="#2、三次握手，建立连接" class="headerlink" title="2、三次握手，建立连接"></a>2、三次握手，建立连接</h3><p>TCP 连接建立要解决的首要问题就是：<strong>要使每一方能够确知对方的存在。</strong><br><strong>​</strong></p>
+<p>三次握手就像，在一个黑暗的森林，你知道前方十点钟方向好像有人。<br>你喊了一句：Hello？I’am JerryC，Who are you？<br>对面回了一句：Hi! I’am David, and nice to meet you!<br>然后你回了一句：Nice to meet you too! ……(自此，你们才算真正认识了双方，开始了后面省略 3000 字的谈话)<br>​</p>
+<p>所以说，两个人需要交朋友（两个端点需要建立连接），至少需要三次的通话（握手）。<br>​</p>
+<p>其实，网络上的传输是没有连接的，TCP 也是一样的。<br>而 TCP 所谓的「连接」，其实只不过是在通信的双方维护一个「连接状态」，让它看上去好像有连接一样。<br>​</p>
+<h4 id="连接建立过程"><a href="#连接建立过程" class="headerlink" title="连接建立过程"></a>连接建立过程</h4><p>TCP 连接的建立采用客户服务器方式，主动发起连接建立的一方叫<strong>客户端（Client）</strong>，被动等待连接建立的一方叫<strong>服务器（Server）</strong>。<br>​</p>
+<p>最初的时候，两端都处于<strong>CLOSED</strong>的状态，然后服务器打开了 TCP 服务，进入<strong>LISTEN</strong>状态，监听特定端口，等待客户端的 TCP 请求。<br>​</p>
+<p><strong>第一次握手</strong>： 客户端主动打开连接，发送 TCP 报文，进行第一次握手，然后进入 SYN_SEND 状态，等待服务器发回确认报文。 这时首部的同步位 SYN = 1，同时初始化一个序号 Sequence Number = J。 TCP 规定，SYN 报文段不能携带数据，但会消耗一个序号。<br>​</p>
+<p><strong>第二次握手</strong>： 服务器收到了 SYN 报文，如果同意建立连接，则向客户端发送一个确认报文，然后服务器进入<strong>SYN_RCVD</strong> 状态。 这时首部的 SYN = 1，ACK = 1，而确认号 Acknowledgemt Number = J + 1，同时也为自己初始化一个序号 Sequence Number = K。 这个报文同样不携带数据。<br>​</p>
+<p><strong>第三次握手</strong>： 客户端收到了服务器发过来的确认报文，还要向服务器给出确认，然后进入<strong>ESTABLISHED</strong>状态。 这时首部的 SYN 不再置为 1，而 ACK = 1，确认号 Acknowledgemt Number = K + 1，序号 Sequence Number = J + 1。 第三次握手，一般会携带真正需要传输的数据，当服务器收到该数据报文的时候，就会同样进入<strong>ESTABLISHED</strong>状态。 此时，TCP 连接已经建立。<br>​</p>
+<p>对于建立连接的三次握手，主要目的是初始化序号 Sequence Number，并且通信的双方都需要告知对方自己的初始化序号，所以这个过程也叫 SYN。 这个序号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输问题而乱序，因为 TCP 会用这个序号来拼接数据。<br>​</p>
+<h4 id="利用连接设计缺陷实施-TCP-Flood-攻击"><a href="#利用连接设计缺陷实施-TCP-Flood-攻击" class="headerlink" title="利用连接设计缺陷实施 TCP Flood 攻击"></a>利用连接设计缺陷实施 TCP Flood 攻击</h4><p>知道了 TCP 建立一个连接，需要进行三次握手。<br>但如果你开始思考「三次握手的必要性」的时候，就会知道，其实网络是很复杂的，一个信息在途中丢失的可能性是有的。<br>如果数据丢失了，那么，就需要重新发送，这时候就要知道数据是否真的送达了。 这就是三次握手的必要性。<br>但是再向深一层思考，你给我发信息，我收到了，我回复，因为我是君子。<br>如果是小人，你给我发信息，我就算收到了，我也不回复，你就一直等我着我的回复。<br>那么很多小人都这样做，你就要一直记住你在等待着小人 1 号、小人 2 号、小人 3 号……直到你的脑容量爆棚，烧坏脑袋。<br>黑客就是利用这样的设计缺陷，实施 TCP Flood 攻击，属于 DDOS 攻击的一种。</p>
+<h3 id="3、四次挥手，释放连接"><a href="#3、四次挥手，释放连接" class="headerlink" title="3、四次挥手，释放连接"></a>3、四次挥手，释放连接</h3><p>TCP 有一个特别的概念叫做<strong>半关闭</strong>，这个概念是说，TCP 的连接是全双工（可以同时发送和接收）的连接，因此在关闭连接的时候，必须关闭传送和接收两个方向上的连接。 客户端给服务器发送一个携带 FIN 的 TCP 结束报文段，然后服务器返回给客户端一个 确认报文段，同时发送一个 结束报文段，当客户端回复一个 确认报文段 之后，连接就结束了。<br>​</p>
+<h4 id="释放连接过程"><a href="#释放连接过程" class="headerlink" title="释放连接过程"></a>释放连接过程</h4><p>在结束之前，通信双方都是处于 <strong>ESTABLISHED</strong> 状态，然后其中一方主动断开连接。 下面假如客户端先主动断开连接。<br>​</p>
+<p><strong>第一次挥手：</strong>客户端向服务器发送结束报文段，然后进入<strong>FIN_WAIT_1</strong>状态。 此报文段 FIN = 1， Sequence Number = M。<br>​</p>
+<p><strong>第二次挥手：</strong>服务端收到客户端的结束报文段，然后发送确认报文段，进入<strong>CLOSE_WAIT</strong>状态。 此报文段 ACK = 1， Sequence Number = M + 1。<br>客户端收到该报文，会进入 <strong>FIN_WAIT_2</strong> 状态。<br>​</p>
+<p><strong>第三次挥手：</strong>同时服务端向客户端发送结束报文段，然后进入<strong>LAST_ACK</strong>状态。 此报文段 FIN = 1，Sequence Number = N。<br>​</p>
+<p><strong>第四次挥手：</strong>客户端收到服务端的结束报文段，然后发送确认报文段，进入<strong>TIME_WAIT</strong>状态，经过 2MSL 之后，自动进入<strong>CLOSED</strong>状态。 此报文段 ACK = 1, Sequence Number = N + 1。<br>​</p>
+<p>服务端收到该报文之后，进入 <strong>CLOSED</strong> 状态。<br>​</p>
+<p><strong>关于 TIME_WAIT 过渡到 CLOSED 状态说明</strong>： 从<strong>TIME_WAIT</strong>进入<strong>CLOSED</strong>需要经过 2MSL，其中 MSL 就叫做 最长报文段寿命（Maxinum Segment Lifetime），根据 RFC 793 建议该值这是为 2 分钟，也就是说需要经过 4 分钟，才进入<strong>CLOSED</strong>状态。</p>
+<h2 id="四、TCP-状态流转"><a href="#四、TCP-状态流转" class="headerlink" title="四、TCP 状态流转"></a>四、TCP 状态流转</h2><p>无论客户端还是服务器，在双方 TCP 通讯的过程中，都会有着一个「状态」的概念，状态会随着 TCP 通讯的不同阶段而变化。</p>
+<h3 id="1-TCP-状态流转图"><a href="#1-TCP-状态流转图" class="headerlink" title="1. TCP 状态流转图"></a>1. TCP 状态流转图</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/519483/1627388566322-c022f200-3986-45a0-b1f1-366417c5c26c.jpeg#clientId=ucabfc325-94fa-4&amp;from=drop&amp;id=u647c9220&amp;margin=%5Bobject%20Object%5D&amp;name=image%20%281%29.jpeg&amp;originHeight=812&amp;originWidth=846&amp;originalType=binary%E2%88%B6=1&amp;size=75494&amp;status=done&amp;style=none&amp;taskId=u1629fcf5-0681-4047-bb09-8dc5102ed40" alt="image (1).jpeg"></p>
+<h3 id="2-各种状态表示的意思"><a href="#2-各种状态表示的意思" class="headerlink" title="2. 各种状态表示的意思"></a>2. 各种状态表示的意思</h3><p><strong>CLOSED</strong>：表示初始状态<br><strong>LISTEN</strong>：表示服务器端的某个 socket 处于监听状态，可以接受连接<br><strong>SYN_SENT</strong>：在服务端监听后，客户端 socket 执行 CONNECT 连接时，客户端发送 SYN 报文，此时客户端就进入 SYN_SENT 状态，等待服务端确认。<br><strong>SYN_RCVD</strong>：表示服务端接收到了 SYN 报文。<br><strong>ESTABLISHED</strong>：表示连接已经建立了。<br><strong>FIN_WAIT_1</strong>：其中一方请求终止连接，等待对方的 FIN 报文。<br><strong>FIN_WAIT_2</strong>：在<strong>FIN_WAIT_2</strong> 之后， 当对方回应 ACK 报文之后，进入该状态。<br><strong>TIME_WAIT</strong>：表示收到了对方的 FIN 报文，并发送出了 ACK 报文，就等 2MSL 之后即可回到 CLOSED 状态。<br><strong>CLOSING</strong>：一种罕见状态，发生在发送 FIN 报文之后，本应是先收到 ACK 报文，却先收到对方的 FIN 报文，那么就从 FIN_WAIT_1 的状态进入 CLOSING 状态。<br><strong>CLOSE_WAIT</strong>：表示等待关闭，在 ESTABLISHED 过渡到 LAST_ACK 的一个过渡阶段，该阶段需要考虑是否还有数据发送给对方，如果没有，就可以关闭连接，发送 FIN 报文，然后进入 LAST_ACK 状态。<br><strong>LAST_ACK</strong>：被动关闭一方发送 FIN 报文之后，最后等待对方的 ACK 报文所处的状态。<br><strong>CLOSED</strong>：当收到 ACK 保温后，就可以进入 CLOSED 状态了。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Truda</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://truda.puuuq.cn/post/3fc8ae63.html">https://truda.puuuq.cn/post/3fc8ae63.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Truda</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">网络</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'dUfhmY8DQD7nvM9jk938wXVh-9Nh9j0Va',
+        appKey: 'zLFARcyTrc6nVaMrnkk0uDJk',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/post/c70bad6f.html">
+                    <div class="card-image">
+                        
+                        <img src="https://s3.jpg.cm/2021/07/29/IV2P4S.png" class="responsive-img" alt="IP分类与子网划分">
+                        
+                        <span class="card-title">IP分类与子网划分</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            IP分类与子网划分
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/post/1fac9017.html">
+                    <div class="card-image">
+                        
+                        <img src="https://s3.jpg.cm/2021/07/27/IVQnsX.jpg" class="responsive-img" alt="OSI七层和TCP/IP四层的关系">
+                        
+                        <span class="card-title">OSI七层和TCP/IP四层的关系</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            OSI七层和TCP/IP四层的关系
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('1'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Truda</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">54.7k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "11";
+                    var startDate = "13";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">桂ICP备19000092号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/truda8" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:chenhaikun8@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1218471864" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1218471864" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/chen-hai-kun-41" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/chen-hai-kun-41" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b28e7ac5cfdab286078b6358ca0c3c01";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.5'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

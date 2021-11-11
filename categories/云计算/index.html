@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Truda,Blog,SEC">
+    <meta name="keywords" content="分类: 云计算, Truda,Blog,SEC">
     <meta name="description" content="Truda Blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Truda Blog</title>
+    <title>分类: 云计算 | Truda Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -307,56 +307,9 @@
 
 </header>
 
-    
-<style>
-    .carousel-control {
-        width: 45px;
-        height: 45px;
-        line-height: 55px;
-        border-radius: 45px;
-        background: transparent;
-        cursor: pointer;
-        z-index: 100;
-    }
-
-    #prev-cover {
-        position: absolute;
-        top: 48%;
-        left: 8px;
-    }
-
-    #next-cover {
-        position: absolute;
-        top: 48%;
-        right: 8px;;
-    }
-
-    #prev-cover i {
-        margin-right: 3px;
-    }
-
-    #next-cover i {
-        margin-left: 3px;
-    }
-
-    .carousel-control:hover {
-        background-color: rgba(0, 0, 0, .4);
-    }
-
-    .carousel-control i {
-        color: #fff;
-        font-size: 2.4rem;
-    }
-</style>
-
-
-
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
-
-    <div class="carousel-item red white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+    <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
         <div class="brand">
             <div class="title center-align">
@@ -393,574 +346,143 @@
 </script>
 
 
-
-            <div class="cover-btns">
-                <a href="#indexCard" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
-
-                
-                    <a href="https://github.com/truda8" class="waves-effect waves-light btn" target="_blank">
-                        <i class="fab fa-github-alt"></i>Github
-                    </a>
-                
-            </div>
-            <div class="cover-social-link">
-    <a href="https://github.com/truda8" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:chenhaikun8@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1218471864" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1218471864" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-    <a href="https://www.zhihu.com/people/chen-hai-kun-41" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/chen-hai-kun-41" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
-    </a>
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-        </div>
     </div>
-
-    
 </div>
-
-<script>
-    $(function () {
-        let coverSlider = $('.carousel');
-
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
-
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
-        }
-
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'true' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
-
-        let carouselIntervalId;
-        
-        // Loop to call the next cover article picture.
-        let autoCarousel = function () {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
-
-        function restartPlay() {
-            
-            clearInterval(carouselIntervalId);
-            autoCarousel();
-            
-        };
-
-        
-        // prev and next cover post.
-        $('#prev-cover').click(function () {
-            coverSlider.carousel('prev');
-            restartPlay();
-        });
-        $('#next-cover').click(function () {
-            coverSlider.carousel('next');
-            restartPlay();
-        });
-        
-    });
-</script>
-
-
 
 <main class="content">
 
     
-    <div id="indexCard" class="index-card">
-        <div class="container ">
-            <div class="card">
-                <div class="card-content">
-                    
-                        <div class="dream">
-    
-    <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;时刻谨记
-    </div>
-    
-    <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            低调求发展，潜心习安全。
+
+<div id="category-cloud" class="container chip-container">
+    <div class="card">
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+            </div>
+            <div class="tag-chips">
+                
+                
+                
+                <a href="/categories/%E9%9A%8F%E7%AC%94/" title="随笔: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9EBEA;">随笔
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/Linux/" title="Linux: 20">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F5EEF8;">Linux
+                        <span class="tag-length">20</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/CTF/" title="CTF: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #D5F5E3;">CTF
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E8%BF%90%E7%BB%B4/" title="运维: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #E8F8F5;">运维
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" title="云计算: 5">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            style="background-color: #FEF9E7;">云计算
+                        <span class="tag-length">5</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/" title="安全工具: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F8F9F9;">安全工具
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E5%BC%80%E5%8F%91/" title="开发: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #82E0AA;">开发
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E7%BD%91%E7%BB%9C/" title="网络: 6">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #D7BDE2;">网络
+                        <span class="tag-length">6</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/MongoDB/" title="MongoDB: 10">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #A3E4D7;">MongoDB
+                        <span class="tag-length">10</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" title="渗透测试: 10">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #85C1E9;">渗透测试
+                        <span class="tag-length">10</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/WEB%E5%AE%89%E5%85%A8/" title="WEB安全: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F8C471;">WEB安全
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+            </div>
         </div>
     </div>
 </div>
 
-                    
-
-                    
-
-                    
-
-                    
-                    <div id="recommend-sections" class="recommend">
-                        
-
-
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
 
     
 
-    <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
-        <div class="row article-row">
+        <div class="row tags-posts">
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/9448a947.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/13/IwMxVQ.png" class="responsive-img" alt="渗透工具合集">
-                            
-                            <span class="card-title">渗透工具合集</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                个人常用渗透工具
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Tools/">
-                            <span class="chip bg-color">Tools</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/3f3e39e4.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/09/IwGQ32.png" class="responsive-img" alt="RACTF Web题Writeup">
-                            
-                            <span class="card-title">RACTF Web题Writeup</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                RACTF Web题Writeup
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/CTF/" class="post-category">
-                                    CTF
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/CTF/">
-                            <span class="chip bg-color">CTF</span>
-                        </a>
-                        
-                        <a href="/tags/Writeup/">
-                            <span class="chip bg-color">Writeup</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/31538d4f.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/06/Iv8Q8i.png" class="responsive-img" alt="任意文件上传绕过">
-                            
-                            <span class="card-title">任意文件上传绕过</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                任意文件上传绕过
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-02
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
-                            <span class="chip bg-color">文件上传</span>
-                        </a>
-                        
-                        <a href="/tags/%E7%BB%95%E8%BF%87/">
-                            <span class="chip bg-color">绕过</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/ced5a0fe.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/06/IvVSLO.png" class="responsive-img" alt="Nmap绕过防火墙扫描">
-                            
-                            <span class="card-title">Nmap绕过防火墙扫描</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Nmap绕过防火墙扫描
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-30
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/">
-                            <span class="chip bg-color">防火墙</span>
-                        </a>
-                        
-                        <a href="/tags/Nmap/">
-                            <span class="chip bg-color">Nmap</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/9b491ac2.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/06/IvV7jD.png" class="responsive-img" alt="图马制作">
-                            
-                            <span class="card-title">图马制作</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                图片马制作方法
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-28
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%9B%BE%E9%A9%AC/">
-                            <span class="chip bg-color">图马</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/9015fd24.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/06/Iv6ZtC.png" class="responsive-img" alt="使用SSL/TLS对抗流量检测">
-                            
-                            <span class="card-title">使用SSL/TLS对抗流量检测</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                使用SSL/TLS对抗流量检测
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%B5%81%E9%87%8F%E6%A3%80%E6%B5%8B/">
-                            <span class="chip bg-color">流量检测</span>
-                        </a>
-                        
-                        <a href="/tags/SSL-TLS%E2%80%8B/">
-                            <span class="chip bg-color">SSL/TLS​</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/5fd295ac.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/06/Iv6O55.jpg" class="responsive-img" alt="MySQL xpath 报错注入">
-                            
-                            <span class="card-title">MySQL xpath 报错注入</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                MySQL xpath 报错注入
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-22
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/SQL%E6%B3%A8%E5%85%A5/">
-                            <span class="chip bg-color">SQL注入</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">
-                            <span class="chip bg-color">报错注入</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/post/f018521c.html">
-                        <div class="card-image">
-                            
-                            <img src="https://s3.jpg.cm/2021/10/06/Iv6Djr.png" class="responsive-img" alt="PTES渗透测试执行标准">
-                            
-                            <span class="card-title">PTES渗透测试执行标准</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                PTES渗透测试执行标准
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    渗透测试
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/PTES/">
-                            <span class="chip bg-color">PTES</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%B8%97%E9%80%8F/">
-                            <span class="chip bg-color">渗透</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/post/14b661.html">
-                        <div class="card-image">
+                        <div class="card-image tag-image">
                             
                             <img src="https://s3.jpg.cm/2021/08/19/IUE6Le.png" class="responsive-img" alt="Mysql 主从配置">
                             
                             <span class="card-title">Mysql 主从配置</span>
                         </div>
                     </a>
-
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
@@ -1000,33 +522,32 @@
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/post/94ac57e3.html">
-                        <div class="card-image">
+                    <a href="/post/29dc6fe8.html">
+                        <div class="card-image tag-image">
                             
-                            <img src="https://s3.jpg.cm/2021/08/11/IXEOVT.jpg" class="responsive-img" alt="Linux 高级操作">
+                            <img src="https://s3.jpg.cm/2021/07/21/Il0Xlf.jpg" class="responsive-img" alt="Docker常用命令">
                             
-                            <span class="card-title">Linux 高级操作</span>
+                            <span class="card-title">Docker常用命令</span>
                         </div>
                     </a>
-
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Linux 高级操作
+                                Docker常用命令
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-21
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                                <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" class="post-category">
+                                    云计算
                                 </a>
                                 
                                 
@@ -1037,8 +558,12 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/Linux/">
-                            <span class="chip bg-color">Linux</span>
+                        <a href="/tags/Docker/">
+                            <span class="chip bg-color">Docker</span>
+                        </a>
+                        
+                        <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/">
+                            <span class="chip bg-color">云计算</span>
                         </a>
                         
                     </div>
@@ -1046,33 +571,32 @@
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/post/9f04c795.html">
-                        <div class="card-image">
+                    <a href="/post/9f4704e8.html">
+                        <div class="card-image tag-image">
                             
-                            <img src="https://s3.jpg.cm/2021/07/29/IV26Pw.png" class="responsive-img" alt="Linux文本处理">
+                            <img src="https://s3.jpg.cm/2021/03/30/hsoIT.jpg" class="responsive-img" alt="RedHat配置本地Yum源">
                             
-                            <span class="card-title">Linux文本处理</span>
+                            <span class="card-title">RedHat配置本地Yum源</span>
                         </div>
                     </a>
-
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Linux文本处理
+                                Centos、RHEL配置本地Yum源
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                                <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" class="post-category">
+                                    云计算
                                 </a>
                                 
                                 
@@ -1085,6 +609,14 @@
                         
                         <a href="/tags/Linux/">
                             <span class="chip bg-color">Linux</span>
+                        </a>
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                            <span class="chip bg-color">运维</span>
+                        </a>
+                        
+                        <a href="/tags/Yum/">
+                            <span class="chip bg-color">Yum</span>
                         </a>
                         
                     </div>
@@ -1092,33 +624,32 @@
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/post/5580e2ac.html">
-                        <div class="card-image">
+                    <a href="/post/77447fe2.html">
+                        <div class="card-image tag-image">
                             
-                            <img src="https://s3.jpg.cm/2021/08/10/IXXMui.png" class="responsive-img" alt="Bash Shell脚本编写技巧">
+                            <img src="https://s3.jpg.cm/2021/03/30/hsNUR.jpg" class="responsive-img" alt="keepalived配置">
                             
-                            <span class="card-title">Bash Shell脚本编写技巧</span>
+                            <span class="card-title">keepalived配置</span>
                         </div>
                     </a>
-
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Bash Shell脚本编写技巧
+                                keepalived简单配置
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                                <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" class="post-category">
+                                    云计算
                                 </a>
                                 
                                 
@@ -1133,8 +664,77 @@
                             <span class="chip bg-color">Linux</span>
                         </a>
                         
-                        <a href="/tags/shell/">
-                            <span class="chip bg-color">shell</span>
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                            <span class="chip bg-color">运维</span>
+                        </a>
+                        
+                        <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">
+                            <span class="chip bg-color">高可用</span>
+                        </a>
+                        
+                        <a href="/tags/keepalived/">
+                            <span class="chip bg-color">keepalived</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/post/6b5ff5c0.html">
+                        <div class="card-image tag-image">
+                            
+                            <img src="https://s3.jpg.cm/2021/03/22/C3hpH.png" class="responsive-img" alt="Spark集群部署">
+                            
+                            <span class="card-title">Spark集群部署</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Spark集群部署搭建
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-22
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" class="post-category">
+                                    云计算
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Linux/">
+                            <span class="chip bg-color">Linux</span>
+                        </a>
+                        
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                            <span class="chip bg-color">运维</span>
+                        </a>
+                        
+                        <a href="/tags/Spark/">
+                            <span class="chip bg-color">Spark</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                            <span class="chip bg-color">架构</span>
+                        </a>
+                        
+                        <a href="/tags/%E9%9B%86%E7%BE%A4/">
+                            <span class="chip bg-color">集群</span>
                         </a>
                         
                     </div>
@@ -1144,32 +744,7 @@
             
         </div>
     </article>
-
 </main>
-
-
-<div class="container paging">
-    <div class="row">
-        <div class="col s6 m4 l4">
-            
-            <a class="left btn-floating btn-large disabled">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            
-        </div>
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 6</div>
-        </div>
-        <div class="col s6 m4 l4">
-            
-            <a href="/page/2/"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-right"></i>
-            </a>
-            
-        </div>
-    </div>
-</div>
 
 
 
